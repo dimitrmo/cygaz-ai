@@ -14,16 +14,6 @@
             "price": 1.378
         },
         {
-            "brand": "PETROLINA",
-            "offline": false,
-            "company": "MICHALIS KNEKNAS TRADING LTD",
-            "address": "Γρηγόρη Αυξεντίου 76, Κοκκινοτριμιθιά Τ.Κ 2660\n τηλ: 22834160",
-            "latitude": "35.148666",
-            "longitude": "33.212235",
-            "area": "Κοκκινοτριμιθιά",
-            "price": 1.389
-        },
-        {
             "brand": "ESSO",
             "offline": false,
             "company": "\"ΑΔΕΛΦΟΙ ΚΟΥΡΙΔΗ ΛΙΜΙΤΕΔ\"",
@@ -35,7 +25,7 @@
         },
         {
             "brand": "ESSO",
-            "offline": false,
+            "offline": true,
             "company": "A &amp; K PAVLOU TRADING LIMITED",
             "address": "Πάφου 21 Τ.Κ 3052\n τηλ: 25562279",
             "latitude": "34.6744035108073",
@@ -72,6 +62,16 @@
             "longitude": "32.8633",
             "area": "Πάνω Πλάτρες",
             "price": 1.459
+        },
+        {
+            "brand": "ESSO",
+            "offline": false,
+            "company": "ΣΙΜΟΣ ΚΑΔΗ ΛΙΜΙΤΕΔ",
+            "address": "Λεωφ. Διγενή Ακρίτα 43, Άγιος Αντώνιος Τ.Κ 1070\n τηλ: 22751717",
+            "latitude": "35.1668579182817",
+            "longitude": "33.3703520423279",
+            "area": "Λευκωσία",
+            "price": 1.369
         }
     ]
 }
