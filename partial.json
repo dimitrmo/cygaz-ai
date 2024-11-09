@@ -1,0 +1,77 @@
+{
+    "updated_at": 1731138261276,
+    "updated_at_str": "2024-11-09 07:44:21.000 UTC",
+    "petroleum_type": "Unlead95",
+    "stations": [
+        {
+            "brand": "ESSO",
+            "offline": false,
+            "company": "I.G. MAKRIS ENTERPRISES LTD",
+            "address": "Καντάρας 58 Τ.Κ 1037\n τηλ: 22433430",
+            "latitude": "35.1845138888889",
+            "longitude": "33.3895",
+            "area": "Καϊμακλί",
+            "price": 1.378
+        },
+        {
+            "brand": "PETROLINA",
+            "offline": false,
+            "company": "MICHALIS KNEKNAS TRADING LTD",
+            "address": "Γρηγόρη Αυξεντίου 76, Κοκκινοτριμιθιά Τ.Κ 2660\n τηλ: 22834160",
+            "latitude": "35.148666",
+            "longitude": "33.212235",
+            "area": "Κοκκινοτριμιθιά",
+            "price": 1.389
+        },
+        {
+            "brand": "ESSO",
+            "offline": false,
+            "company": "\"ΑΔΕΛΦΟΙ ΚΟΥΡΙΔΗ ΛΙΜΙΤΕΔ\"",
+            "address": "Ευαγόρα Παλληκαρίδη 53 Τ.Κ 8010\n τηλ: 26933657",
+            "latitude": "34.7779977652251",
+            "longitude": "32.4236665755325",
+            "area": "Πάφος",
+            "price": 1.398
+        },
+        {
+            "brand": "ESSO",
+            "offline": false,
+            "company": "A &amp; K PAVLOU TRADING LIMITED",
+            "address": "Πάφου 21 Τ.Κ 3052\n τηλ: 25562279",
+            "latitude": "34.6744035108073",
+            "longitude": "33.013875861377",
+            "area": "Λεμεσός",
+            "price": 1.384
+        },
+        {
+            "brand": "EKO",
+            "offline": false,
+            "company": "A G A PETROL STATION LIMITED",
+            "address": "Λεωφ. Λουκή Ακρίτα 1 Τ.Κ 1100\n τηλ: 22774819",
+            "latitude": "35.17265",
+            "longitude": "33.350405",
+            "area": "Λευκωσία",
+            "price": 1.399
+        },
+        {
+            "brand": "PETROLINA",
+            "offline": false,
+            "company": "A. K. Konnaris Service Station Ltd",
+            "address": "Παναγίας Ελεούσας 55 Τ.Κ 4730\n τηλ: 25432020",
+            "latitude": "34.8458",
+            "longitude": "32.9121",
+            "area": "Τριμίκλινη",
+            "price": 1.449
+        },
+        {
+            "brand": "PETROLINA",
+            "offline": false,
+            "company": "A. K. Konnaris Service Station Ltd (Platres)",
+            "address": "Παναγίας Φανερωμένης 57 Τ.Κ\n τηλ: 25421100",
+            "latitude": "34.8843",
+            "longitude": "32.8633",
+            "area": "Πάνω Πλάτρες",
+            "price": 1.459
+        }
+    ]
+}
