@@ -1,0 +1,25 @@
+{
+    "name": "cygaz-ai-mcp-server",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "description": "MCP server for Cyprus gas prices workflows",
+    "scripts": {
+        "build": "tsc -p tsconfig.json",
+        "dev": "tsx src/server.ts",
+        "format": "prettier . --write",
+        "format:check": "prettier . --check",
+        "test": "node --test --import tsx test/router.test.ts",
+        "start": "node dist/server.js"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.29.0",
+        "zod": "^4.4.3"
+    },
+    "devDependencies": {
+        "@types/node": "^25.9.1",
+        "prettier": "^3.8.3",
+        "tsx": "^4.22.3",
+        "typescript": "^6.0.3"
+    }
+}

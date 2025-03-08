@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "cygaz-ai": {
+      "type": "stdio",
+      "command": "${workspaceFolder}/node_modules/.bin/tsx",
+      "args": ["src/server.ts"],
+      "cwd": "${workspaceFolder}"
+    }
+  }
+}
