@@ -1,15 +1,48 @@
 {
     "version": "0.2",
     "ignorePaths": [],
-    "dictionaryDefinitions": [],
-    "dictionaries": [],
+    "dictionaryDefinitions": [
+        {
+            "name": "custom-dictionary",
+            "path": "./.cspell/custom-dictionary.txt",
+            "addWords": true
+        }
+    ],
+    "dictionaries": [
+        "custom-dictionary"
+    ],
     "words": [
         "cygaz",
         "ESSO",
+        "Latsia",
         "Marv",
         "openai",
+        "Paphou",
         "PETROLINA",
-        "tiktoken"
+        "tiktoken",
+        "Unlead",
+        "Άγιος",
+        "ΑΔΕΛΦΟΙ",
+        "Ακρίτα",
+        "Αντώνιος",
+        "Αυξεντίου",
+        "Γρηγόρη",
+        "Διγενή",
+        "Ελεούσας",
+        "Ευαγόρα",
+        "Καντάρας",
+        "Κοκκινotrimiθιά",
+        "ΚΥΡΥΔΗ",
+        "Λατσιά",
+        "Λευκωσία",
+        "Λεωφ",
+        "ΛΙΜΙΤΕΔ",
+        "Λουκή",
+        "Λουκής",
+        "Παλληκαρίδη",
+        "Παναγίας",
+        "Πάφου",
+        "Φανερωμένης"
     ],
     "ignoreWords": [],
     "import": []
