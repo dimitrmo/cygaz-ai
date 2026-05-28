@@ -38,9 +38,17 @@ CYGAZ_RAPIDAPI_KEY=your_key_here
 CYGAZ_RAPIDAPI_HOST=cygaz.p.rapidapi.com
 CYGAZ_PRICES_URL=https://cygaz.p.rapidapi.com/prices
 CYGAZ_DISTRICTS_URL=https://cygaz.p.rapidapi.com/districts
+MCP_TRANSPORT=stdio
+MCP_PORT=3000
+MCP_HTTP_PATH=/mcp
 ```
 
 `CYGAZ_RAPIDAPI_KEY` is required.
+
+`MCP_TRANSPORT` supports:
+
+1. `stdio` (default) for local MCP clients that spawn the process.
+2. `http` (Streamable HTTP) for always-on remote/client connections.
 
 ## Install
 
@@ -54,11 +62,23 @@ npm install
 npm run dev
 ```
 
+Run Streamable HTTP mode:
+
+```bash
+npm run dev:http
+```
+
 ## Build And Start
 
 ```bash
 npm run build
 npm start
+```
+
+Start Streamable HTTP mode from build output:
+
+```bash
+npm run start:http
 ```
 
 ## Tests

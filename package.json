@@ -7,10 +7,12 @@
     "scripts": {
         "build": "tsc -p tsconfig.json",
         "dev": "tsx src/server.ts",
+        "dev:http": "MCP_TRANSPORT=http tsx src/server.ts",
         "format": "prettier . --write",
         "format:check": "prettier . --check",
         "test": "node --test --import tsx test/router.test.ts",
-        "start": "node dist/server.js"
+        "start": "node dist/server.js",
+        "start:http": "MCP_TRANSPORT=http node dist/server.js"
     },
     "dependencies": {
         "@modelcontextprotocol/sdk": "^1.29.0",

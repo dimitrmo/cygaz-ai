@@ -1,5 +1,7 @@
 // @ts-nocheck
+import { createServer as createNodeHttpServer } from "node:http";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 import {
@@ -34,10 +36,10 @@ import {
     refreshDistricts,
 } from "./districts.js";
 
-const server = new McpServer({
+const serverInfo = {
     name: "cygaz-ai",
     version: "0.1.0",
-});
+};
 
 const logPrefix = "[cygaz-ai]";
 
@@ -99,13 +101,16 @@ function withToolLogging(
     };
 }
 
-function registerLoggedTool(...args: any[]): void {
-    const [name, description, inputSchema, handler] = args;
-    const registerTool = (server as any).registerTool.bind(server);
-    const loggedHandler: any = withToolLogging(name, handler);
+function createMcpServer(): McpServer {
+    const server = new McpServer(serverInfo);
 
-    registerTool(name, { description, inputSchema }, loggedHandler);
-}
+    function registerLoggedTool(...args: any[]): void {
+        const [name, description, inputSchema, handler] = args;
+        const registerTool = (server as any).registerTool.bind(server);
+        const loggedHandler: any = withToolLogging(name, handler);
+
+        registerTool(name, { description, inputSchema }, loggedHandler);
+    }
 
 registerLoggedTool(
     "cygaz_ask",
@@ -624,11 +629,104 @@ registerLoggedTool(
     },
 );
 
+    return server;
+}
+
+async function startStreamableHttpServer(): Promise<void> {
+    const port = Number(process.env.MCP_PORT ?? "3000");
+    const endpointPath = process.env.MCP_HTTP_PATH ?? "/mcp";
+
+    const httpServer = createNodeHttpServer((req, res) => {
+        void (async () => {
+            const requestUrl = new URL(
+                req.url ?? "/",
+                `http://${req.headers.host ?? "localhost"}`,
+            );
+
+            if (requestUrl.pathname !== endpointPath) {
+                res.statusCode = 404;
+                res.end("Not Found");
+                return;
+            }
+
+            const allowedMethods = new Set(["GET", "POST", "DELETE"]);
+
+            if (!allowedMethods.has(req.method ?? "")) {
+                res.statusCode = 405;
+                res.setHeader("Content-Type", "application/json");
+                res.end(
+                    JSON.stringify({
+                        jsonrpc: "2.0",
+                        error: {
+                            code: -32000,
+                            message: "Method not allowed.",
+                        },
+                        id: null,
+                    }),
+                );
+                return;
+            }
+
+            const server = createMcpServer();
+            const transport = new StreamableHTTPServerTransport({
+                sessionIdGenerator: undefined,
+            });
+
+            try {
+                await server.connect(transport);
+                await transport.handleRequest(req, res);
+            } catch (error) {
+                logServerEvent("streamable HTTP request failed", {
+                    error:
+                        error instanceof Error ? error.message : String(error),
+                });
+
+                if (!res.headersSent) {
+                    res.statusCode = 500;
+                    res.setHeader("Content-Type", "application/json");
+                    res.end(
+                        JSON.stringify({
+                            jsonrpc: "2.0",
+                            error: {
+                                code: -32603,
+                                message: "Internal server error",
+                            },
+                            id: null,
+                        }),
+                    );
+                }
+            } finally {
+                await transport.close().catch(() => undefined);
+                await server.close().catch(() => undefined);
+            }
+        })();
+    });
+
+    await new Promise<void>((resolve, reject) => {
+        httpServer.once("error", reject);
+        httpServer.listen(port, () => {
+            logServerEvent("MCP Streamable HTTP server listening", {
+                url: `http://localhost:${port}${endpointPath}`,
+            });
+            resolve();
+        });
+    });
+}
+
 const main = async () => {
+    const transportMode = (process.env.MCP_TRANSPORT ?? "stdio").trim();
+    const normalizedMode = transportMode.toLowerCase();
+
+    if (normalizedMode === "http" || normalizedMode === "streamable-http") {
+        await startStreamableHttpServer();
+        return;
+    }
+
+    const server = createMcpServer();
     const transport = new StdioServerTransport();
-    logServerEvent("starting MCP server transport");
+    logServerEvent("starting MCP stdio transport");
     await server.connect(transport);
-    logServerEvent("MCP server connected");
+    logServerEvent("MCP stdio server connected");
 };
 
 main().catch((error) => {
